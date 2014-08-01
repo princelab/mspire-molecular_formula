@@ -70,6 +70,5 @@ module Mspire
       end
 
     end
-    include Arithmetic
   end
 end

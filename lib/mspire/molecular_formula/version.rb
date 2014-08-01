@@ -1,5 +1,5 @@
 module Mspire
-  module MolecularFormula
+  class MolecularFormula
     VERSION = "0.0.1"
   end
 end

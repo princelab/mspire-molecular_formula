@@ -1,3 +1,4 @@
+require 'mspire/mass'
 
 module Mspire
   class MolecularFormula
@@ -28,7 +29,6 @@ module Mspire
         end
       end
     end
-    include Mass
   end
 end
 
