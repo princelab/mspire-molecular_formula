@@ -1,8 +1,5 @@
-
 require 'mspire/mass'
 require 'mspire/isotope'
-require 'mspire/molecular_formula'
-require 'mspire/spectrum'
 
 require 'fftw3'
 
@@ -29,7 +26,7 @@ module Mspire
     #     :max     normalize to the highest peak intensity
     #     :first   normalize to the intensity of the first peak 
     #             (this is typically the monoisotopic peak)
-    def isotope_distribution(normalize: Mspire::Isotope::Distribution::NORMALIZE, peak_cutoff: nil, percent_cutoff: nil, prefer_lowest_index: true, isotope_table: Mspire::Isotope::BY_ELEMENT)
+    def isotope_intensity_distribution(normalize: Mspire::Isotope::Distribution::NORMALIZE, peak_cutoff: nil, percent_cutoff: nil, prefer_lowest_index: true, isotope_table: Mspire::Isotope::BY_ELEMENT)
       mono_dist = raw_isotope_distribution(isotope_table: isotope_table)
 
       cutoff_index = [ 
@@ -64,12 +61,13 @@ module Mspire
       end
     end
 
-    # returns a spectrum object with mass values and intensity values.
-    # Arguments are passed directly to isotope_distribution.
-    # the molecule has a charge, this will be used to adjust the m/z values
-    # (by removing or adding electrons to the m/z and as the z)
-    def isotope_distribution_spectrum(*args)
-      intensities = isotope_distribution(*args)
+    # returns an array of two arrays: mass values (or m/z values of charged)
+    # and intensity values.  Arguments are passed directly to
+    # isotope_intensity_distribution.  the molecule has a charge, this will be
+    # used to adjust the m/z values (by removing or adding electrons to the
+    # m/z and as the z)
+    def isotope_distribution(*args)
+      intensities = isotope_intensity_distribution(*args)
       #mono = self.map {|el,cnt| Mspire::Mass::Element::MONO[el]*cnt }.reduce(:+)
       mono = self.map {|el,cnt| Mspire::Isotope::BY_ELEMENT[el].find(&:mono).atomic_mass*cnt }.reduce(:+)
       masses = Array.new(intensities.size)
@@ -81,7 +79,7 @@ module Mspire
           (mass - (self.charge * Mspire::Mass::ELECTRON)) / self.charge 
         end
       end
-      Mspire::Spectrum.new [masses, intensities]
+      [masses, intensities]
     end
 
     # returns relative ratios from low nominal mass to high nominal mass.
