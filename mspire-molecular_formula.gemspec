@@ -6,10 +6,10 @@ require 'mspire/molecular_formula/version'
 Gem::Specification.new do |spec|
   spec.name          = "mspire-molecular_formula"
   spec.version       = Mspire::MolecularFormula::VERSION
-  spec.authors       = ["John Prince"]
+  spec.authors       = ["John T. Prince"]
   spec.email         = ["jtprince@gmail.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.summary       = %q{mspire library to handle molecular formulas (including an optional charge state)}  
+  spec.description   = %q{mspire library to handle molecular formulas (including an optional charge state), complete with relevant chemical properties such as mass, m/z, and isotope distribution.}
   spec.homepage      = ""
   spec.license       = "MIT"
 
@@ -18,6 +18,19 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_development_dependency "bundler", "~> 1.6"
-  spec.add_development_dependency "rake"
+  [
+    ["mspire-mass", "~> 0.1.0"],  # which brings in mspire-isotope
+  ].each do |args|
+    spec.add_dependency(*args)
+  end
+
+  [
+    ["bundler", "~> 1.6.2"],
+    ["rake"],
+    ["rspec", "~> 2.14.1"], 
+    ["rdoc", "~> 4.1.1"], 
+    ["simplecov", "~> 0.8.2"],
+  ].each do |args|
+    spec.add_development_dependency(*args)
+  end
 end

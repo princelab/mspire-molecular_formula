@@ -6,5 +6,5 @@ mspire library to handle molecular formulas (including an optional charge state)
 
     gem install mspire-molecular_formula
 
-## Examples
+## Usage
 
