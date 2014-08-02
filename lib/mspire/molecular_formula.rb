@@ -1,22 +1,6 @@
 module Mspire
   class MolecularFormula < Hash
-  end
-end
 
-require "mspire/molecular_formula/version"
-
-# class methods for reading from different string input
-require 'mspire/molecular_formula/reader'
-
-# the modules for these 3 are included at the bottom
-require 'mspire/molecular_formula/arithmetic'
-require 'mspire/molecular_formula/mass'
-require 'mspire/molecular_formula/isotope_distribution'
-
-module Mspire
-  class MolecularFormula
-    extend Reader
-     
     # integer desribing the charge state
     # mass calculations will add/remove electron mass from this
     attr_accessor :charge
@@ -57,7 +41,24 @@ module Mspire
     def ==(other)
       old_equal(other) && self.charge == other.charge
     end
-    
+
+  end
+end
+
+require "mspire/molecular_formula/version"
+
+# class methods for reading from different string input
+require 'mspire/molecular_formula/reader'
+
+# the modules for these 3 are included at the bottom
+require 'mspire/molecular_formula/arithmetic'
+require 'mspire/molecular_formula/mass'
+require 'mspire/molecular_formula/isotope_distribution'
+
+module Mspire
+  class MolecularFormula
+    extend Reader
+     
     ####################################################
     # include other behaviors
     ####################################################

@@ -1,3 +1,5 @@
+require 'mspire/molecular_formula/aa'
+
 module Mspire
   class MolecularFormula
     module Reader
@@ -24,16 +26,7 @@ module Mspire
         end
       end
 
-      # a linear peptide (so includes all the residue masses plus water)
-      def from_aaseq(aaseq, aa_formula_hash=Mspire::MolecularFormula::AA::FORMULAS_STRING)
-        hash = aaseq.each_char.inject({}) do |hash,aa| 
-          hash.merge(aa_formula_hash[aa]) {|hash,old,new| (old ? old : 0) + new }
-        end
-        hash[:H] += 2
-        hash[:O] += 1
-        self.new(hash)
-      end
-
+    
       # takes a string, with properly capitalized elements making up the
       # formula.  The elements may be in any order. A charge (e.g., +2, +, -,
       # -3 may be affixed to the end )
@@ -59,3 +52,5 @@ module Mspire
     end
   end
 end
+
+

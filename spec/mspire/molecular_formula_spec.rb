@@ -35,6 +35,18 @@ describe Mspire::MolecularFormula do
       mf.to_h.should == {:Ni=>7, :S=>1, :E=>3}
     end
 
+    specify 'Mspire::MolecularFormula.from_aaseq(seq) from an amino acide sequence' do
+      mf = MF.from_aaseq("ACDEFGIHKLMNOPQRSTUVWY")
+      # checked to be correct with http://web.expasy.org/protparam/
+      mf.to_h.should == {:C=>122, :H=>183, :O=>33, :N=>33, :S=>2, :Se=>1}
+    end
+
+    specify 'Mspire::MolecularFormula.from_aaseq(seq, charge) from an amino acide sequence with charge' do
+      mf = MF.from_aaseq("ACDEFGIHKLMNOPQRSTUVWY", 3)
+      mf.to_h.should == {:C=>122, :H=>183, :O=>33, :N=>33, :S=>2, :Se=>1}
+      mf.charge.should == 3
+    end
+
     it 'from_string or ::[] to make from a capitalized string formula with charge attached' do
       mf = MF.from_string("H22BeC12N1O3S2Li2+")
       mf.charge.should == 1
