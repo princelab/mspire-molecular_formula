@@ -1,5 +1,5 @@
 module Mspire
-  class MolecularFormula
+  class MolecularFormula < Hash
     VERSION = "0.0.1"
   end
 end

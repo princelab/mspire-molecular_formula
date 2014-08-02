@@ -6,12 +6,12 @@ end
 require "mspire/molecular_formula/version"
 
 # class methods for reading from different string input
-require 'mspire/molecular_formual/reader'
+require 'mspire/molecular_formula/reader'
 
 # the modules for these 3 are included at the bottom
-require 'mspire/molecular_formual/arithmetic'
-require 'mspire/molecular_formual/mass'
-require 'mspire/molecular_formual/isotope_distribution'
+require 'mspire/molecular_formula/arithmetic'
+require 'mspire/molecular_formula/mass'
+require 'mspire/molecular_formula/isotope_distribution'
 
 module Mspire
   class MolecularFormula
@@ -38,9 +38,13 @@ module Mspire
         end
       end
       if include_charge_if_nonzero
-        st << "#{'+' if charge > 0}#{charge}" unless charge.zero?
+        st << "#{charge > 0 ? '+' : '-'}#{charge.abs if charge.abs > 1}" unless charge.zero?
       end
       st
+    end
+
+    def inspect
+      "{MolecularFormula #{super[1...-1]}, @charge=#{self.charge}}"
     end
 
     # returns a hash (note: does not pass along charge info!)

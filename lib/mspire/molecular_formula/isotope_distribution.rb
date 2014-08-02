@@ -6,6 +6,7 @@ require 'fftw3'
 module Mspire
   class MolecularFormula
     module IsotopeDistribution
+      NORMALIZE = :total
 
       # Returns isotopic distribution beginning with the lightest possible peak.
       # (for most molecules this will also be the monoisotopic peak)
@@ -27,7 +28,7 @@ module Mspire
       #     :max     normalize to the highest peak intensity
       #     :first   normalize to the intensity of the first peak 
       #             (this is typically the monoisotopic peak)
-      def isotope_intensity_distribution(normalize: Mspire::Isotope::Distribution::NORMALIZE, peak_cutoff: nil, percent_cutoff: nil, prefer_lowest_index: true, isotope_table: Mspire::Isotope::BY_ELEMENT)
+      def isotope_intensity_distribution(normalize: NORMALIZE, peak_cutoff: nil, percent_cutoff: nil, prefer_lowest_index: true, isotope_table: Mspire::Isotope::BY_ELEMENT)
         mono_dist = raw_isotope_distribution(isotope_table: isotope_table)
 
         cutoff_index = [ 

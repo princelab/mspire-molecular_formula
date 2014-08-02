@@ -30,6 +30,9 @@ Gem::Specification.new do |spec|
     ["rspec", "~> 2.14.1"], 
     ["rdoc", "~> 4.1.1"], 
     ["simplecov", "~> 0.8.2"],
+    # here because bad microsoft OS support
+    # TODO: implement w/o FFTW
+    ["fftw3", "~> 0.3"],
   ].each do |args|
     spec.add_development_dependency(*args)
   end

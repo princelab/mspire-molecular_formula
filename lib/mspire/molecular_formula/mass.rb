@@ -7,14 +7,14 @@ module Mspire
       # adds/subtracts electron masses for the charges)
       def mass(consider_electron_masses = true)
         mss = inject(0.0) do |sum,(el,cnt)| 
-          sum + (Mspire::Mass::Element::MONO_STRING[el]*cnt)
+          sum + (Mspire::Mass::Element::MONO_STRING[el.to_s]*cnt)
         end
         mss -= (Mspire::Mass::ELECTRON * charge) if consider_electron_masses
         mss
       end
 
       def avg_mass(consider_electron_masses = true)
-        mss = inject(0.0) {|sum,(el,cnt)| sum + (Mspire::Mass::Element::AVG_STRING[el]*cnt) }
+        mss = inject(0.0) {|sum,(el,cnt)| sum + (Mspire::Mass::Element::AVG_STRING[el.to_s]*cnt) }
         mss -= (Mspire::Mass::ELECTRON * charge) if consider_electron_masses
         mss
       end
