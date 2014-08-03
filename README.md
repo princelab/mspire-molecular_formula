@@ -77,9 +77,11 @@ will throw an error but "oxygen * 3" is fine)
 ethene.isotope_intensity_distribution
 #   => [0.9777084818979036, 0.02215911350461325, 0.0001323273147371948, 7.726507349638125e-08, 
 #       1.7670756693524035e-11, 1.81473621216667e-15, 2.6146991408856273e-17]
+
 # return/use only first 4 peaks and normalize by max peak 
 ethene.isotope_intensity_distribution(normalize: :max, peak_cutoff: 4)
 #   => [1.0, 0.022664335959936163, 0.00013534434566868467, 7.902669857828807e-08]
+
 # cut at less than 0.01% total intensity and normalize by max peak 
 ethene.isotope_intensity_distribution(normalize: :first, percent_cutoff: 0.01)
 #   => [1.0, 0.022664335959936163, 0.00013534434566868467]
@@ -94,7 +96,8 @@ from [emass](https://github.com/princelab/emass) or
 should be accurate enough for many purposes.
 
 ```ruby
-ethene.isotope_distribution  # zero charge, so returns masses and intensities
+# zero charge, so returns masses and intensities
+ethene.isotope_distribution
 #   => [[28.03130012828, 29.039965043880002, 30.048629959480003, ...], 
 #       [0.9777084818979036, 0.02215911350461325, 0.0001323273147371948, ...]]
 
