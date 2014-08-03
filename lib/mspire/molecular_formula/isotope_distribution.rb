@@ -1,7 +1,7 @@
 require 'mspire/mass'
 require 'mspire/isotope'
 
-require 'fftw3'
+# depends on FFTW3 from mspire/molecular_formula right which does the: require 'fftw3'
 
 module Mspire
   class MolecularFormula

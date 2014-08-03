@@ -45,6 +45,7 @@ module Mspire
   end
 end
 
+
 require "mspire/molecular_formula/version"
 
 # class methods for reading from different string input
@@ -53,7 +54,23 @@ require 'mspire/molecular_formula/reader'
 # the modules for these 3 are included at the bottom
 require 'mspire/molecular_formula/arithmetic'
 require 'mspire/molecular_formula/mass'
-require 'mspire/molecular_formula/isotope_distribution'
+
+# currently can't execute isotope dist code without this gem
+# TODO: remove dep.
+def have_fftw3?
+  begin
+    response = require('fftw3')
+    true
+  rescue
+    begin
+      Kernel.const_get('FFTW3')
+    rescue
+      false
+    end
+  end
+end
+
+require 'mspire/molecular_formula/isotope_distribution' if have_fftw3?
 
 module Mspire
   class MolecularFormula
@@ -64,6 +81,8 @@ module Mspire
     ####################################################
     include Arithmetic
     include Mass
-    include IsotopeDistribution
+    if have_fftw3?
+      include IsotopeDistribution 
+    end
   end
 end
