@@ -96,7 +96,7 @@ should be accurate enough for many purposes.
 ```ruby
 ethene.isotope_distribution  # zero charge, so returns masses and intensities
 #   => [[28.03130012828, 29.039965043880002, 30.048629959480003, ...], 
-        [0.9777084818979036, 0.02215911350461325, 0.0001323273147371948, ...]]
+#       [0.9777084818979036, 0.02215911350461325, 0.0001323273147371948, ...]]
 
 # if charged, will return m/z's and intensities
 ethene.charge = 2
