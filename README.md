@@ -112,4 +112,5 @@ ethene = Mspire::MF['C2H4']
 ```
 
 This is just like calling 'mspire/molecular_formula' but it sets the MF
-constant equal to MolecularFormula.
+constant equal to MolecularFormula.  Include Mspire or set your own constant
+if you want something even shorter.
